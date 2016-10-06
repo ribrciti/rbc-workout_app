@@ -11,13 +11,11 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
-group :test do
-  gem 'capybara', '~> 2.8', '>= 2.8.1'
-end
-
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
+  gem 'capybara', '~> 2.8', '>= 2.8.1'
+  gem 'database_cleaner'
 end
 
 group :development do
