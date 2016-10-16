@@ -7,4 +7,5 @@ class Exercise < ApplicationRecord
   validates_presence_of :user_id
 
   scope :exercises_by, ->(user) { where(user_id: user.id) }
+  default_scope { where( 'workout_date > ?', 7.days.ago ).order( workout_date: :desc ) }
 end
