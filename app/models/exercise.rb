@@ -6,6 +6,6 @@ class Exercise < ApplicationRecord
   validates_presence_of :workout_date, numericality: :true
   validates_presence_of :user_id
 
-  scope :exercises_by, ->(user) { where(user_id: user.id) }
-  default_scope { where( 'workout_date > ?', 7.days.ago ).order( workout_date: :desc ) }
+  #default_scope { where( 'workout_date > ?', 7.days.ago).order( workout_date: :desc ) }
+  default_scope { where( 'workout_date <= ? AND workout_date >= ?', Date.today, 8.days.ago ) }
 end

@@ -3,7 +3,7 @@ class ExercisesController < ApplicationController
   before_action :set_exercise, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @exercises = Exercise.exercises_by(current_user).all
+    @exercises = current_user.exercises
   end
 
   def show
@@ -37,10 +37,15 @@ class ExercisesController < ApplicationController
       flash[:danger] = "Exercise has not been updated"
       render :edit
     end
-    
   end
 
-    private
+    def destroy
+      @exercise.destroy
+      flash[:success] = "Exercise has been deleted"
+      redirect_to user_exercises_path(current_user)
+    end
+    
+  private
 
   def exercise_params
     params.require(:exercise).permit(:duration_in_min, :workout, :workout_date, :user_id)
