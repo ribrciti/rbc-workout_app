@@ -5,9 +5,22 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-10.times do |num|
+
+5.times do |num| 
   User.create!(email: "test_#{num}@test.com", password: "asdfasdf", password_confirmation: "asdfasdf", 
-    first_name: "Wesson_#{num}", last_name: "Smith_#{num}")
+    first_name: "Wesson_#{num}", last_name: "Smith_#{num}")  
 end
 
-puts "10 Users have been created"  
+User.all.each do |user|
+  count = 0
+  rand(3..6).times do
+    
+    @min = rand(29..99).to_i
+    workout = ["Running", "Backs and Abs", "Weightlifting", "Stationary Bike", "Swimming", "Fitness Bands", "Basketball", "Jumping Jacks", "Heavy Tire"]
+    @workout = workout[rand(0..8)]
+    @date = (Date.today - count.days)
+    count += 1
+
+    user.exercises.create!(duration_in_min: @min, workout: @workout, workout_date: @date)
+  end
+end
