@@ -8,6 +8,10 @@ class User < ApplicationRecord
 
   validates_presence_of :first_name
   validates_presence_of :last_name
+
+  has_many :friendships
+  has_many :friends, through: :friendships, class_name: "User"
+  
   self.per_page = 5
 
   def full_name
@@ -24,5 +28,9 @@ class User < ApplicationRecord
       where('first_name LIKE ? or first_name LIKE ? or last_name LIKE ? or last_name LIKE ?', 
     "%#{names_array[0]}%", "%#{names_array[1]}%", "%#{names_array[0]}%", "%#{names_array[1]}%").order(:first_name)
     end
+  end
+
+  def follows_or_same?(new_friend)
+    friendships.map(&:friend).include?(new_friend) || self == new_friend
   end
 end

@@ -13,8 +13,8 @@ RSpec.feature "Following Friends" do
   scenario "if signed in succeeds" do
     visit "/"
         
-    expect(page).to have_content("@john.full_name")
-    expect(page).to have_content("@sally.full_name")
+    expect(page).to have_content(@john.full_name)
+    expect(page).to have_content(@sally.full_name)
     expect(page).not_to have_link('Follow', :href => "/friendships?friend_id=#{@john.id}")
 
     link = "a[href='/friendships?friend_id=#{@sally.id}']"
